@@ -52,16 +52,25 @@ def computeProbabilityMatrix(transitionMatrix):
 	# print normed_matrix
 	return normed_matrix
 
+def generateDataFromMarkovMatrix(markovMatrix):
+
+
 if __name__ == '__main__':
 	totalTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
-	for files in os.listdir("fakeData"):
-		states = random_generator.parseEntry("fakeData", files)
-		# print states
+	# for files in os.listdir("fakeData"):
 
-		periods = statesToPeriod(states)
-		transitionMatrix = computeTransitionMatrix(periods)
+	basepath = '../alllogs/'
+	for files in os.listdir(basepath):
+		path = os.path.join(basepath, fname)
+		if os.path.isdir(path):
+			for logFile in os.listdir(path):
+				states = random_generator.parseEntry(path, logFile)
+				print states
 
-		totalTransitionMatrix = totalTransitionMatrix + transitionMatrix
+				periods = statesToPeriod(states)
+				transitionMatrix = computeTransitionMatrix(periods)
+
+				totalTransitionMatrix = totalTransitionMatrix + transitionMatrix
 	print totalTransitionMatrix
 	normed_matrix = computeProbabilityMatrix(totalTransitionMatrix)
 	print normed_matrix

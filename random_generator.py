@@ -61,7 +61,9 @@ def parseEntry(path, filename):
 	entries = []
 	with open(os.path.join(path, filename), 'r') as f:
 		for line in f:
-			timeStart, timeEnd, ip, device, id = [item.strip() for item in line.split(",")]
+			# timeStart, timeEnd, ip, device, id = [item.strip() for item in line.split(",")]
+
+			timeStart, timeEnd, ip, device, id = [item.strip() for item in line.split(";")]
 			timeStart = datetime.strptime(timeStart, "%H:%M:%S")
 			timeEnd = datetime.strptime(timeEnd, "%H:%M:%S")
 
