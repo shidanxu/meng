@@ -80,7 +80,7 @@ def generateDataFromMarkovMatrix(markovMatrix, period = 15):
 					currentState = jj
 					break
 		elif currentState == 2:
-			cumProb = np.cumsum(markovMatrix[0])
+			cumProb = np.cumsum(markovMatrix[2])
 			for jj in range(len(cumProb)):
 				if randomNum < cumProb[jj]:
 					output.append(jj)
