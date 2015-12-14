@@ -61,7 +61,7 @@ if __name__ == '__main__':
 
 	basepath = '../../alllogs/'
 	for files in os.listdir(basepath):
-		path = os.path.join(basepath, fname)
+		path = os.path.join(basepath, files)
 		if os.path.isdir(path):
 			for logFile in os.listdir(path):
 				states = random_generator.parseEntry(path, logFile)
