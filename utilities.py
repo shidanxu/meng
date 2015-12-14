@@ -65,12 +65,14 @@ if __name__ == '__main__':
 		if os.path.isdir(path):
 			for logFile in os.listdir(path):
 				states = random_generator.parseEntry(path, logFile)
-				print states
+				# print states
 
 				periods = statesToPeriod(states)
 				transitionMatrix = computeTransitionMatrix(periods)
 
 				totalTransitionMatrix = totalTransitionMatrix + transitionMatrix
+				print totalTransitionMatrix
+				
 	print totalTransitionMatrix
 	normed_matrix = computeProbabilityMatrix(totalTransitionMatrix)
 	print normed_matrix

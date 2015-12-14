@@ -108,7 +108,7 @@ def parseEntry(path, filename):
 				states.append((time, 1, list(devicesOnline)))
 
 	# Make sure everyone logged off
-	assert len(devicesOnline) == 0
+	# assert len(devicesOnline) == 0
 	return states
 
 			
