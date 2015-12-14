@@ -59,7 +59,7 @@ if __name__ == '__main__':
 	totalTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
 	# for files in os.listdir("fakeData"):
 
-	basepath = '../alllogs/'
+	basepath = '../../alllogs/'
 	for files in os.listdir(basepath):
 		path = os.path.join(basepath, fname)
 		if os.path.isdir(path):
