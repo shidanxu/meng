@@ -50,6 +50,7 @@ def computeTransitionMatrix(periods, states = 3):
 	return np.matrix(transitionMatrix)
 
 def computeProbabilityMatrix(transitionMatrix):
+	print "to be normalized: ", transitionMatrix
 	normed_matrix = normalize(transitionMatrix.astype(float), axis=1, norm='l1')
 	# print normed_matrix
 	return normed_matrix
