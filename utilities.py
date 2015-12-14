@@ -53,7 +53,7 @@ def computeProbabilityMatrix(transitionMatrix):
 	return normed_matrix
 
 def generateDataFromMarkovMatrix(markovMatrix):
-
+	return
 
 if __name__ == '__main__':
 	totalTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
