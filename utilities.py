@@ -46,7 +46,7 @@ def computeTransitionMatrix(periods, states = 3):
 		# print transitionMatrix
 	assert sum([sum(item) for item in transitionMatrix]) == len(periods) - 1
 
-	# print np.matrix(transitionMatrix)
+	print "the matrix: ", np.matrix(transitionMatrix)
 	return np.matrix(transitionMatrix)
 
 def computeProbabilityMatrix(transitionMatrix):
