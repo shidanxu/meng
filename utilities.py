@@ -145,6 +145,7 @@ if __name__ == '__main__':
 	for kk in range(testSampleSize):
 		markov_generated = generateDataFromMarkovMatrix(normed_matrix)
 		transitionMatrix = computeTransitionMatrix(markov_generated)
+		print transitionMatrix
 		testTransitionMatrix = testTransitionMatrix + transitionMatrix
 
 	print "Testing data generated."
