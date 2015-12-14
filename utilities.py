@@ -59,11 +59,17 @@ if __name__ == '__main__':
 	totalTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
 	# for files in os.listdir("fakeData"):
 
+	limit = 1000
+	finished = False
 	basepath = '../../alllogs/'
 	for files in os.listdir(basepath):
+		if finished:
+			break
 		path = os.path.join(basepath, files)
 		if os.path.isdir(path):
 			for logFile in os.listdir(path):
+				if limit == 0:
+					finished = True
 				states = random_generator.parseEntry(path, logFile)
 				# print states
 
@@ -71,8 +77,10 @@ if __name__ == '__main__':
 				transitionMatrix = computeTransitionMatrix(periods)
 
 				totalTransitionMatrix = totalTransitionMatrix + transitionMatrix
+				limit -= 1
+				print limit
 				print totalTransitionMatrix
-				
+
 	print totalTransitionMatrix
 	normed_matrix = computeProbabilityMatrix(totalTransitionMatrix)
 	print normed_matrix
