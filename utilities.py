@@ -9,6 +9,8 @@ import random_generator
 import numpy as np
 import os
 from sklearn.preprocessing import normalize
+import random
+
 
 def statesToPeriod(states, timePeriod = 15):
 	lengthPeriods = 24*60 / timePeriod
@@ -52,37 +54,99 @@ def computeProbabilityMatrix(transitionMatrix):
 	# print normed_matrix
 	return normed_matrix
 
-def generateDataFromMarkovMatrix(markovMatrix):
+def generateDataFromMarkovMatrix(markovMatrix, period = 15):
+	numStates = markovMatrix.shape[0]
+	# print numStates
+	sampleLength = 60*24 / period
+
+	output = [0]
+	currentState = 0
+	for i in range(sampleLength - 1):
+		randomNum = random.random()
+		# print randomNum
+		if currentState == 0:
+			cumProb = np.cumsum(markovMatrix[0])
+			# print cumProb
+			for jj in range(len(cumProb)):
+				if randomNum < cumProb[jj]:
+					output.append(jj)
+					currentState = jj
+					break
+		elif currentState == 1:
+			cumProb = np.cumsum(markovMatrix[1])
+			for jj in range(len(cumProb)):
+				if randomNum < cumProb[jj]:
+					output.append(jj)
+					currentState = jj
+					break
+		elif currentState == 2:
+			cumProb = np.cumsum(markovMatrix[0])
+			for jj in range(len(cumProb)):
+				if randomNum < cumProb[jj]:
+					output.append(jj)
+					currentState = jj
+					break
+
+	# print output, len(output)
+	return output
+
+
+
+
 	return
 
 if __name__ == '__main__':
 	totalTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
 	# for files in os.listdir("fakeData"):
+	testSampleSize = 1000
 
 	limit = 1000
 	finished = False
+	parse = True
 	basepath = '../../alllogs/'
-	for files in os.listdir(basepath):
-		if finished == True:
-			break
-		path = os.path.join(basepath, files)
-		if os.path.isdir(path):
-			for logFile in os.listdir(path):
-				if limit == 0:
-					finished = True
-					break
-					
-				states = random_generator.parseEntry(path, logFile)
-				# print states
 
-				periods = statesToPeriod(states)
-				transitionMatrix = computeTransitionMatrix(periods)
+	try:
+		os.listdir(basepath)
+	except Exception, e:
+		print e
+		parse = False
+	
+	if parse:
+		for files in os.listdir(basepath):
+			if finished == True:
+				break
+			path = os.path.join(basepath, files)
+			if os.path.isdir(path):
+				for logFile in os.listdir(path):
+					if limit == 0:
+						finished = True
+						break
 
-				totalTransitionMatrix = totalTransitionMatrix + transitionMatrix
-				limit -= 1
-				print limit
-				print totalTransitionMatrix
+					states = random_generator.parseEntry(path, logFile)
+					# print states
+
+					periods = statesToPeriod(states)
+					transitionMatrix = computeTransitionMatrix(periods)
+
+					totalTransitionMatrix = totalTransitionMatrix + transitionMatrix
+					limit -= 1
+					print limit
+					print totalTransitionMatrix
 
 	print totalTransitionMatrix
 	normed_matrix = computeProbabilityMatrix(totalTransitionMatrix)
 	print normed_matrix
+
+
+	testTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
+	
+	for kk in range(testSampleSize):
+		markov_generated = generateDataFromMarkovMatrix(normed_matrix)
+		transitionMatrix = computeTransitionMatrix(markov_generated)
+		testTransitionMatrix = testTransitionMatrix + transitionMatrix
+
+		print testTransitionMatrix
+
+	normed_matrix_test = computeProbabilityMatrix(testTransitionMatrix)
+	print normed_matrix_test
+
