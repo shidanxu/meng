@@ -130,9 +130,10 @@ if __name__ == '__main__':
 
 					totalTransitionMatrix = totalTransitionMatrix + transitionMatrix
 					limit -= 1
-					print limit
-					print totalTransitionMatrix
+					# print limit
+					# print totalTransitionMatrix
 
+	print "Training finished."
 	print totalTransitionMatrix
 	normed_matrix = computeProbabilityMatrix(totalTransitionMatrix)
 	print normed_matrix
@@ -140,12 +141,14 @@ if __name__ == '__main__':
 
 	testTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
 	
+	print "\n\n"
 	for kk in range(testSampleSize):
 		markov_generated = generateDataFromMarkovMatrix(normed_matrix)
 		transitionMatrix = computeTransitionMatrix(markov_generated)
 		testTransitionMatrix = testTransitionMatrix + transitionMatrix
 
-		print testTransitionMatrix
+	print "Testing data generated."
+	print testTransitionMatrix
 
 	normed_matrix_test = computeProbabilityMatrix(testTransitionMatrix)
 	print normed_matrix_test
