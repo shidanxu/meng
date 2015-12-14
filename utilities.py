@@ -66,7 +66,7 @@ def generateDataFromMarkovMatrix(markovMatrix, period = 15):
 		# print randomNum
 		if currentState == 0:
 			cumProb = np.cumsum(markovMatrix[0])
-			print cumProb
+			# print cumProb
 			for jj in range(len(cumProb)):
 				if randomNum < cumProb[jj]:
 					output.append(jj)
