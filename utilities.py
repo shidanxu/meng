@@ -63,13 +63,15 @@ if __name__ == '__main__':
 	finished = False
 	basepath = '../../alllogs/'
 	for files in os.listdir(basepath):
-		if finished:
+		if finished == True:
 			break
 		path = os.path.join(basepath, files)
 		if os.path.isdir(path):
 			for logFile in os.listdir(path):
 				if limit == 0:
 					finished = True
+					break
+					
 				states = random_generator.parseEntry(path, logFile)
 				# print states
 
