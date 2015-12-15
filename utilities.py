@@ -10,6 +10,7 @@ import numpy as np
 import os
 from sklearn.preprocessing import normalize
 import random
+import seaborn as sns
 
 
 def statesToPeriod(states, timePeriod = 15):
@@ -96,11 +97,44 @@ def generateDataFromMarkovMatrix(markovMatrix, period = 15):
 		# print "output: ", output
 	# print output, len(output)
 	return output
+# Evaluate 1 compares the distribution of number of transitions each day for both the generated and testing actual data
+def evaluate1(dailyStates, size = 1000, basepath = '../../alllogs/'):
+	assert len(dailyStates) == size
+	limit = size
 
+	distributionGenerated = []
+	distributionTest = []
+	done == False
 
+	for dayStates in dailyStates:
+		distributionGenerated.append(countNumTransitions(dayStates))
 
+	for files in os.listdir(basepath):
+		if done == True:
+			break
+		with open(basepath + files, 'r') as f:
+			limit -= 1
+			states = random_generator.parseEntry(basepath, files)
+			distributionTest.append(countNumTransitions(states))
+
+		if limit == 0:
+			done == True
+
+	# Plot
+	sns.distplot(distributionTest)
+	sns.distplot(distributionGenerated)
 
 	return
+
+def countTransitions(dayStates):
+	total = 0
+	currentState = dayStates[0]
+	for state in dayStates:
+		if state != currentState:
+			total += 1
+			currentState = state
+	return total
+
 
 if __name__ == '__main__':
 	totalTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
@@ -147,10 +181,13 @@ if __name__ == '__main__':
 
 
 	testTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
-	
+	dailyStates = []
+
 	print "\n\n"
 	for kk in range(testSampleSize):
 		markov_generated = generateDataFromMarkovMatrix(normed_matrix)
+		dailyStates.append(markov_generated)
+
 		transitionMatrix = computeTransitionMatrix(markov_generated)
 		# print transitionMatrix
 		testTransitionMatrix = testTransitionMatrix + transitionMatrix
@@ -160,4 +197,8 @@ if __name__ == '__main__':
 
 	normed_matrix_test = computeProbabilityMatrix(testTransitionMatrix)
 	print normed_matrix_test
+
+	evaluate1(dailyStates)
+
+
 
