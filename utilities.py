@@ -131,7 +131,7 @@ def evaluate1(dailyStates, size = 1000, basepath = '../../alllogs/'):
 	# plt.subplot
 	plt.hist(distributionTest)
 	plt.hist(distributionGenerated)
-	plt.show()
+	plt.savefig("results.png")
 
 	return
 
