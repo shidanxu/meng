@@ -205,7 +205,7 @@ if __name__ == '__main__':
 	normed_matrix_test = computeProbabilityMatrix(testTransitionMatrix)
 	print normed_matrix_test
 
-	evaluate1(dailyStates)
+	evaluate1(dailyStates, limit)
 
 
 
