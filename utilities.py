@@ -104,7 +104,7 @@ def evaluate1(dailyStates, size = 1000, basepath = '../../alllogs/'):
 
 	distributionGenerated = []
 	distributionTest = []
-	done == False
+	done = False
 
 	for dayStates in dailyStates:
 		distributionGenerated.append(countNumTransitions(dayStates))
