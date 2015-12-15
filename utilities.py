@@ -122,8 +122,9 @@ def evaluate1(dailyStates, size = 1000, basepath = '../../alllogs/'):
 				with open(os.path.join(path, logFile), 'r') as f:
 					limit -= 1
 					states = random_generator.parseEntry(path, logFile)
-					print "states: ", states
-					distributionTest.append(countTransitions(states))
+					
+					periodStates = statesToPeriod(states)
+					distributionTest.append(countTransitions(periodStates))
 
 				if limit == 0:
 					done = True
