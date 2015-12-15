@@ -107,7 +107,7 @@ def evaluate1(dailyStates, size = 1000, basepath = '../../alllogs/'):
 	done = False
 
 	for dayStates in dailyStates:
-		distributionGenerated.append(countNumTransitions(dayStates))
+		distributionGenerated.append(countTransitions(dayStates))
 
 	for files in os.listdir(basepath):
 		if done == True:
@@ -115,7 +115,7 @@ def evaluate1(dailyStates, size = 1000, basepath = '../../alllogs/'):
 		with open(basepath + files, 'r') as f:
 			limit -= 1
 			states = random_generator.parseEntry(basepath, files)
-			distributionTest.append(countNumTransitions(states))
+			distributionTest.append(countTransitions(states))
 
 		if limit == 0:
 			done == True
