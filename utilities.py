@@ -10,7 +10,7 @@ import numpy as np
 import os
 from sklearn.preprocessing import normalize
 import random
-import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 def statesToPeriod(states, timePeriod = 15):
@@ -121,8 +121,10 @@ def evaluate1(dailyStates, size = 1000, basepath = '../../alllogs/'):
 			done == True
 
 	# Plot
-	sns.distplot(distributionTest)
-	sns.distplot(distributionGenerated)
+	# plt.subplot
+	plt.hist(distributionTest)
+	plt.hist(distributionGenerated)
+	plt.show()
 
 	return
 
