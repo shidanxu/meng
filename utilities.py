@@ -129,9 +129,13 @@ def evaluate1(dailyStates, size = 1000, basepath = '../../alllogs/'):
 
 	# Plot
 	# plt.subplot
-	plt.hist(distributionTest)
-	plt.hist(distributionGenerated)
-	plt.savefig("results.png")
+	print "distributionGenerated: "
+	print distributionGenerated
+	print "\n distributionTest: "
+	print distributionTest
+	# plt.hist(distributionTest)
+	# plt.hist(distributionGenerated)
+	# plt.savefig("results.png")
 
 	return
 
@@ -183,16 +187,16 @@ if __name__ == '__main__':
 					# print limit
 					# print totalTransitionMatrix
 
-	print "Training finished."
-	print totalTransitionMatrix
+	# print "Training finished."
+	# print totalTransitionMatrix
 	normed_matrix = computeProbabilityMatrix(totalTransitionMatrix)
-	print normed_matrix
+	# print normed_matrix
 
 
 	testTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
 	dailyStates = []
 
-	print "\n\n"
+	# print "\n\n"
 	for kk in range(testSampleSize):
 		markov_generated = generateDataFromMarkovMatrix(normed_matrix)
 		dailyStates.append(markov_generated)
@@ -201,11 +205,11 @@ if __name__ == '__main__':
 		# print transitionMatrix
 		testTransitionMatrix = testTransitionMatrix + transitionMatrix
 
-	print "Testing data generated."
-	print testTransitionMatrix
+	# print "Testing data generated."
+	# print testTransitionMatrix
 
 	normed_matrix_test = computeProbabilityMatrix(testTransitionMatrix)
-	print normed_matrix_test
+	# print normed_matrix_test
 
 	evaluate1(dailyStates, size = testSampleSize)
 
