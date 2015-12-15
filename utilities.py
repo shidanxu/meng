@@ -51,7 +51,7 @@ def computeTransitionMatrix(periods, states = 3):
 	return np.matrix(transitionMatrix)
 
 def computeProbabilityMatrix(transitionMatrix):
-	print "to be normalized: ", transitionMatrix
+	# print "to be normalized: ", transitionMatrix
 	normed_matrix = normalize(transitionMatrix.astype(float), axis=1, norm='l1')
 	# print normed_matrix
 	return normed_matrix
@@ -122,6 +122,7 @@ def evaluate1(dailyStates, size = 1000, basepath = '../../alllogs/'):
 				with open(os.path.join(path, logFile), 'r') as f:
 					limit -= 1
 					states = random_generator.parseEntry(path, logFile)
+					print "states: ", states
 					distributionTest.append(countTransitions(states))
 
 				if limit == 0:
