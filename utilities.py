@@ -109,16 +109,21 @@ def evaluate1(dailyStates, size = 1000, basepath = '../../alllogs/'):
 	for dayStates in dailyStates:
 		distributionGenerated.append(countTransitions(dayStates))
 
+
 	for files in os.listdir(basepath):
 		if done == True:
-			break
-		with open(basepath + files, 'r') as f:
-			limit -= 1
-			states = random_generator.parseEntry(basepath, files)
-			distributionTest.append(countTransitions(states))
+			break	
+		path = os.path.join(basepath, files)
+		
+		if os.path.isdir(path):
+			for logFile in os.listdir(path):
+				with open(path + logFile, 'r') as f:
+					limit -= 1
+					states = random_generator.parseEntry(path, logFile)
+					distributionTest.append(countTransitions(states))
 
-		if limit == 0:
-			done == True
+				if limit == 0:
+					done = True
 
 	# Plot
 	# plt.subplot
