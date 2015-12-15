@@ -46,7 +46,7 @@ def computeTransitionMatrix(periods, states = 3):
 		# print transitionMatrix
 	assert sum([sum(item) for item in transitionMatrix]) == len(periods) - 1
 
-	print "the matrix: ", np.matrix(transitionMatrix)
+	# print "the matrix: ", np.matrix(transitionMatrix)
 	return np.matrix(transitionMatrix)
 
 def computeProbabilityMatrix(transitionMatrix):
@@ -65,10 +65,10 @@ def generateDataFromMarkovMatrix(markovMatrix, period = 15):
 	for i in range(sampleLength - 1):
 		# raw_input()
 		randomNum = random.random()
-		print "the random number is:", randomNum
+		# print "the random number is:", randomNum
 		if currentState == 1:
 			cumProb = np.cumsum(markovMatrix[0])
-			print "state = 0, cumprob:", cumProb
+			# print "state = 0, cumprob:", cumProb
 			for jj in range(len(cumProb)):
 				if randomNum < cumProb[jj]:
 					output.append(jj + 1)
@@ -77,7 +77,7 @@ def generateDataFromMarkovMatrix(markovMatrix, period = 15):
 					break
 		elif currentState == 2:
 			cumProb = np.cumsum(markovMatrix[1])
-			print "state = 1, cumprob:", cumProb
+			# print "state = 1, cumprob:", cumProb
 			for jj in range(len(cumProb)):
 				if randomNum < cumProb[jj]:
 					output.append(jj + 1)
@@ -86,14 +86,14 @@ def generateDataFromMarkovMatrix(markovMatrix, period = 15):
 					break
 		elif currentState == 3:
 			cumProb = np.cumsum(markovMatrix[2])
-			print "state = 2, cumprob:", cumProb
+			# print "state = 2, cumprob:", cumProb
 			for jj in range(len(cumProb)):
 				if randomNum < cumProb[jj]:
 					output.append(jj + 1)
 					currentState = jj + 1
 					# print "i, currentState:", i, currentState
 					break
-		print "output: ", output
+		# print "output: ", output
 	# print output, len(output)
 	return output
 
@@ -152,7 +152,7 @@ if __name__ == '__main__':
 	for kk in range(testSampleSize):
 		markov_generated = generateDataFromMarkovMatrix(normed_matrix)
 		transitionMatrix = computeTransitionMatrix(markov_generated)
-		print transitionMatrix
+		# print transitionMatrix
 		testTransitionMatrix = testTransitionMatrix + transitionMatrix
 
 	print "Testing data generated."
