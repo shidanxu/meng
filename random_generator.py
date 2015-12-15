@@ -3,7 +3,6 @@ import os
 import time
 import glob
 from datetime import datetime
-from sets import Set
 
 markov = [[0.99, 0.01, 0], [0.1, 0.8, 0.1], [0, 0.05, 0.95]]
 
@@ -82,7 +81,7 @@ def parseEntry(path, filename):
 	# State 2 => Online with 1 device
 	# State 3 => Online wiht >=2 devices
 	states = [(datetime.strptime("00:00:00", "%H:%M:%S"), 1, [])]
-	devicesOnline = Set()
+	devicesOnline = set()
 
 	for (ip, action, time) in combinedActions:
 		# print (ip, action, time)

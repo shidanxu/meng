@@ -128,6 +128,7 @@ def evaluate1(dailyStates, size = 1000, basepath = '../../alllogs/'):
 
 				if limit == 0:
 					done = True
+					break
 
 	# Plot
 	# plt.subplot
