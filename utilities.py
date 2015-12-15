@@ -155,9 +155,9 @@ def countTransitions(dayStates):
 if __name__ == '__main__':
 	totalTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
 	# for files in os.listdir("fakeData"):
-	testSampleSize = 100
+	testSampleSize = 1000
 
-	limit = 100
+	limit = 1000
 	finished = False
 	parse = True
 	basepath = '../../alllogs/'
