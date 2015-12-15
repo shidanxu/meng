@@ -117,7 +117,7 @@ def evaluate1(dailyStates, size = 1000, basepath = '../../alllogs/'):
 		
 		if os.path.isdir(path):
 			for logFile in os.listdir(path):
-				with open(path + logFile, 'r') as f:
+				with open(os.path.join(path, logFile), 'r') as f:
 					limit -= 1
 					states = random_generator.parseEntry(path, logFile)
 					distributionTest.append(countTransitions(states))
