@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import dateparser
 import re
 import os
 from datetime import datetime
