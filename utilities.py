@@ -264,6 +264,7 @@ if __name__ == '__main__':
 					print "limit: ", limit
 
 	nparray = np.array(arrayOfFeatures)
+	print nparray.shape
 	col, row = nparray.shape
-	print np.divide(np.sum(nparray, axis=0), row)
+	print np.divide(np.sum(nparray, axis=0), float(row))
 	
