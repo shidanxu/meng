@@ -220,9 +220,9 @@ def doMarkovNaive(testSampleSize = 1000):
 if __name__ == '__main__':
 	totalTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
 	# for files in os.listdir("fakeData"):
-	testSampleSize = 1000
+	testSampleSize = 100
 
-	limit = 1000
+	limit = 100
 	finished = False
 	parse = True
 	basepath = '../../alllogs/'
@@ -261,6 +261,8 @@ if __name__ == '__main__':
 
 					
 					limit -= 1
+					print "limit: ", limit
 
-	print arrayOfFeatures
+	nparray = np.array(arrayOfFeatures)
+	print np.sum(nparray, axis=0)
 	
