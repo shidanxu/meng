@@ -233,6 +233,7 @@ if __name__ == '__main__':
 		print e
 		parse = False
 	
+	arrayOfFeatures = []
 	if parse:
 		for files in os.listdir(basepath):
 			if finished == True:
@@ -244,8 +245,7 @@ if __name__ == '__main__':
 						finished = True
 						break
 
-					with open(os.path.join(path,logFile), 'r') as h:
-						arrayOfFeatures = []
+					with open(os.path.join(path,logFile), 'r') as h:					
 						lines = h.readlines()
 						for line in lines:
 							if line:
@@ -259,45 +259,8 @@ if __name__ == '__main__':
 
 								arrayOfFeatures.append(feature)
 
-						print arrayOfFeatures
-								
-
-					states = random_generator.parseEntry(path, logFile)
-					# print states
-
-					periods = statesToPeriod(states)
-					transitionMatrix = computeTransitionMatrix(periods)
-
-					totalTransitionMatrix = totalTransitionMatrix + transitionMatrix
+					
 					limit -= 1
-					# print limit
-					# print totalTransitionMatrix
 
-	# print "Training finished."
-	# print totalTransitionMatrix
-	normed_matrix = computeProbabilityMatrix(totalTransitionMatrix)
-	# print normed_matrix
-
-
-	testTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
-	dailyStates = []
-
-	# print "\n\n"
-	for kk in range(testSampleSize):
-		markov_generated = generateDataFromMarkovMatrix(normed_matrix)
-		dailyStates.append(markov_generated)
-
-		transitionMatrix = computeTransitionMatrix(markov_generated)
-		# print transitionMatrix
-		testTransitionMatrix = testTransitionMatrix + transitionMatrix
-
-	# print "Testing data generated."
-	# print testTransitionMatrix
-
-	normed_matrix_test = computeProbabilityMatrix(testTransitionMatrix)
-	# print normed_matrix_test
-
-	evaluate1(dailyStates, size = testSampleSize)
-
-
-
+	print arrayOfFeatures
+	
