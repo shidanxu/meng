@@ -250,9 +250,9 @@ if __name__ == '__main__':
 						for line in lines:
 							if line:
 								feature = [features.durationLessThanMinute(line)]
-								feature.extend(features.durationOneToFive(line))
-								feature.extend(features.durationFiveOrMore(line))
-								feature.extend(features.device(line))
+								feature.extend([features.durationOneToFive(line)])
+								feature.extend([features.durationFiveOrMore(line)])
+								feature.extend([features.device(line)])
 								feature.extend(features.ipFeature(line))
 								feature.extend(features.timeStartFeature(line))
 								feature.extend(features.timeEndFeature(line))
