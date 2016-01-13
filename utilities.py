@@ -265,7 +265,7 @@ if __name__ == '__main__':
 
 	nparray = np.array(arrayOfFeatures)
 	print nparray.shape
-	col, row = nparray.shape
+	row, col = nparray.shape
 
 	plotted = np.divide(np.sum(nparray, axis=0), float(row))
 	print plotted
@@ -274,5 +274,5 @@ if __name__ == '__main__':
 	plt.plot(plotted)
 	plt.ylabel('Distribtuton')
 	plt.savefig("1.png")
-	
+
 	
