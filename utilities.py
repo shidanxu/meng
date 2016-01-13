@@ -266,5 +266,13 @@ if __name__ == '__main__':
 	nparray = np.array(arrayOfFeatures)
 	print nparray.shape
 	col, row = nparray.shape
-	print np.divide(np.sum(nparray, axis=0), float(row))
+
+	plotted = np.divide(np.sum(nparray, axis=0), float(row))
+	print plotted
+
+	import matplotlib.pyplot as plt
+	plt.plot(plotted)
+	plt.ylabel('Distribtuton')
+	plt.savefig("1.png")
+	
 	
