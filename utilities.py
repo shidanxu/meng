@@ -244,7 +244,7 @@ if __name__ == '__main__':
 						finished = True
 						break
 
-					with open(logFile, 'r') as h:
+					with open(os.join(path,logFile), 'r') as h:
 						arrayOfFeatures = []
 						lines = h.readlines()
 						for line in lines:
