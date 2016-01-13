@@ -11,6 +11,7 @@ import os
 from sklearn.preprocessing import normalize
 import random
 import matplotlib.pyplot as plt
+import features
 
 
 def statesToPeriod(states, timePeriod = 15):
@@ -151,6 +152,70 @@ def countTransitions(dayStates):
 			currentState = state
 	return total
 
+def doMarkovNaive(testSampleSize = 1000):
+	totalTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
+
+	limit = testSampleSize
+	finished = False
+	parse = True
+	basepath = '../../alllogs/'
+
+	try:
+		os.listdir(basepath)
+	except Exception, e:
+		print e
+		parse = False
+	
+	if parse:
+		for files in os.listdir(basepath):
+			if finished == True:
+				break
+			path = os.path.join(basepath, files)
+			if os.path.isdir(path):
+				for logFile in os.listdir(path):
+					if limit == 0:
+						finished = True
+						break
+
+					states = random_generator.parseEntry(path, logFile)
+					# print states
+
+					periods = statesToPeriod(states)
+					transitionMatrix = computeTransitionMatrix(periods)
+
+					totalTransitionMatrix = totalTransitionMatrix + transitionMatrix
+					limit -= 1
+					# print limit
+					# print totalTransitionMatrix
+
+	# print "Training finished."
+	# print totalTransitionMatrix
+	normed_matrix = computeProbabilityMatrix(totalTransitionMatrix)
+	# print normed_matrix
+
+
+	testTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
+	dailyStates = []
+
+	# print "\n\n"
+	for kk in range(testSampleSize):
+		markov_generated = generateDataFromMarkovMatrix(normed_matrix)
+		dailyStates.append(markov_generated)
+
+		transitionMatrix = computeTransitionMatrix(markov_generated)
+		# print transitionMatrix
+		testTransitionMatrix = testTransitionMatrix + transitionMatrix
+
+	# print "Testing data generated."
+	# print testTransitionMatrix
+
+	normed_matrix_test = computeProbabilityMatrix(testTransitionMatrix)
+	# print normed_matrix_test
+
+	evaluate1(dailyStates, size = testSampleSize)
+
+
+
 
 if __name__ == '__main__':
 	totalTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
@@ -178,6 +243,24 @@ if __name__ == '__main__':
 					if limit == 0:
 						finished = True
 						break
+
+					with open(logFile, 'r') as h:
+						arrayOfFeatures = []
+						lines = h.readlines()
+						for line in lines:
+							if line:
+								feature = [features.durationLessThanMinute(line)]
+								feature.extend(features.durationOneToFive(line))
+								feature.extend(features.durationFiveOrMore(line))
+								feature.extend(features.device(line))
+								feature.extend(features.ipFeature(line))
+								feature.extend(features.timeStartFeature(line))
+								feature.extend(features.timeEndFeature(line))
+
+								arrayOfFeatures.append(feature)
+
+						print arrayOfFeatures
+								
 
 					states = random_generator.parseEntry(path, logFile)
 					# print states
