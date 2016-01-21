@@ -42,9 +42,10 @@ if __name__ == '__main__':
 				count_list.append(count)
 
 				for line in content:
-					ip = np.array(features.ipFeature(line))
-					if ip:
-					# print ip
+					val = features.ipFeature(line)
+					if val != None:
+						ip = np.array(val)
+						# print ip
 						ip_count_list = np.add(ip_count_list, ip)
 						total_ip += 1
 						
