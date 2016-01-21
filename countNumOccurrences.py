@@ -17,9 +17,10 @@ if __name__ == '__main__':
 	
 	for afile in files:
 		print afile
-		with open(os.path.join(current_path, afile), 'r') as f:
-			content = f.readlines()
-			count = 0
-			for line in content:
-				count += 1
-			print count
+		for individual_files in os.path.join(current_path, afile):
+			with open(os.path.join(os.path.join(current_path, afile), individual_files), 'r') as f:
+				content = f.readlines()
+				count = 0
+				for line in content:
+					count += 1
+				print count
