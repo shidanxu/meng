@@ -17,7 +17,7 @@ if __name__ == '__main__':
 	
 	for afile in files:
 		print afile
-		for individual_files in os.path.join(current_path, afile):
+		for individual_files in os.listdir(os.path.join(current_path, afile)):
 			print individual_files
 			with open(os.path.join(os.path.join(current_path, afile), individual_files), 'r') as f:
 				content = f.readlines()
