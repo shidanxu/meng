@@ -78,9 +78,12 @@ def device(line):
 
 
 def duration(line):
-    start, end, ip, device, identity = line.split(";")
-    FMT = '%H:%M:%S'
-    tdelta = datetime.strptime(end.strip(), FMT) - datetime.strptime(start.strip(), FMT)
+    try:
+        start, end, ip, device, identity = line.split(";")
+        FMT = '%H:%M:%S'
+        tdelta = datetime.strptime(end.strip(), FMT) - datetime.strptime(start.strip(), FMT)    
+    except ValueError:
+        return None
     return tdelta.seconds
 
 def durationLessThanMinute(line):
