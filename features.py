@@ -20,9 +20,9 @@ def ipFeature(line):
 
     vec = first8 + second8 + third8 + fourth8
 
-    print vec
-    print list(vec)
-    return list(vec)
+    # print vec
+    # print list(vec)
+    return [int(x) for x in list(vec)]
 
 def timeStartFeature(line):
     start, end, ip, device, identity = line.split(";")
