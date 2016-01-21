@@ -18,12 +18,10 @@ def ipFeature(line):
     third8 = '{0:08b}'.format(ip3)
     fourth8 = '{0:08b}'.format(ip4)
 
-    vec[0:8] = first8
-    vec[8:16] = second8
-    vec[16:24] = third8
-    vec[24:32] = fourth8
+    vec = first8 + second8 + third8 + fourth8
 
     print vec
+    print list(vec)
     return list(vec)
 
 def timeStartFeature(line):
