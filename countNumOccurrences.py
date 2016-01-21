@@ -9,11 +9,11 @@ import matplotlib.pyplot as plt
 if __name__ == '__main__':
 
 	currentPath = os.getcwd()
-	oldpath = "/../../alllogs/"
+	oldpath = "../../alllogs/"
 
 	files = utilities.get_all_files(oldpath)
 
-	current_path = currentPath + oldpath
+	current_path = os.path.join(currentPath, oldpath)
 	
 	for afile in files:
 		print afile
