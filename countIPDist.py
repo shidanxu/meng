@@ -44,7 +44,7 @@ if __name__ == '__main__':
 				for line in content:
 					ip = np.array(features.ipFeature(line))
 					print ip
-					ip_count_list = np.sum(ip_count_list, ip)
+					ip_count_list = np.add(ip_count_list, ip)
 					total_ip += 1
 					
 
