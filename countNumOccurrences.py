@@ -1,4 +1,4 @@
-import utiilties
+import utilities
 import random_generator
 import numpy as np
 import os
