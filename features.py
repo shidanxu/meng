@@ -13,7 +13,7 @@ def ipFeature(line):
         start, end, ip, device, identity = line.split(";")
     except ValueError:
         return None
-        
+
     ip = ip.strip()
     ip1, ip2, ip3, ip4 = [int(x) for x in ip.split(".")]
     vec = "0"* 32
@@ -29,7 +29,11 @@ def ipFeature(line):
     return [int(x) for x in list(vec)]
 
 def timeStartFeature(line):
-    start, end, ip, device, identity = line.split(";")
+    try:
+        start, end, ip, device, identity = line.split(";")
+    except ValueError:
+        return None
+
     hour, minute, sec = [int(x) for x in start.strip().split(":")]
 
     first5 = '{0:05b}'.format(hour)
@@ -37,13 +41,10 @@ def timeStartFeature(line):
     third6 = '{0:06b}'.format(sec)
 
 
-    vect = "0" * 17
-    vect[0:5] = first5
-    vect[5:11] = second6
-    vect[11:17] = third6
+    vect = first5 + second6 + third6
 
-    print vect
-    return list(vect)
+    # print vect
+    return [int(x) for x in list(vect)]
 
 def timeEndFeature(line):
     start, end, ip, device, identity = line.split(";")

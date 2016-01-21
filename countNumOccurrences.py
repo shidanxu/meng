@@ -24,12 +24,15 @@ if __name__ == '__main__':
 			with open(os.path.join(os.path.join(current_path, afile), individual_files), 'r') as f:
 				content = f.readlines()
 				count = len(content)
+
 				# print count
 				# if count > 300:
 					# print count, content
 					# print "\n\n\n"
 					# raw_input()
 				count_list.append(count)
+
+			
 
 	print count_list
 	print sum(count_list) / len(count_list)

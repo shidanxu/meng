@@ -25,6 +25,12 @@ model = pm.Model()
 
 # This model approximates the avg time spent per session as a distribution
 observed_numberOccurrences = pickle.load( open( "numberOccurrence.p", "rb" ) )
+# observed_ipFrequencies = pickle.load( open( "ipBinaryFrequency.p", "rb" ) )
+print observed_ipFrequencies
+
+# plt.plot(observed_ipFrequencies, 'ro')
+# plt.show()
+
 
 a = np.array(observed_numberOccurrences)
 upper_bound = np.percentile(a, 95)
