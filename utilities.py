@@ -13,6 +13,10 @@ import random
 import matplotlib.pyplot as plt
 import features
 
+def get_all_files(mypath):
+	return [ f for f in os.listdir(mypath) if os.path.isdir(os.path.join(mypath,f)) ]
+
+
 
 def statesToPeriod(states, timePeriod = 15):
 	lengthPeriods = 24*60 / timePeriod
@@ -218,6 +222,21 @@ def doMarkovNaive(testSampleSize = 1000):
 
 
 if __name__ == '__main__':
+
+	currentPath = os.getcwd() + "../../"
+	oldpath = "../../alllogs"
+
+	files = get_all_files(oldpath)
+
+	for afile in files:
+		print afile
+		with open(os.path.join(current_path, afile), 'r') as f:
+			content = f.readlines()
+			count = 0
+			for line in content:
+				count += 1
+			print count
+		
 	totalTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
 	# for files in os.listdir("fakeData"):
 	testSampleSize = 30
