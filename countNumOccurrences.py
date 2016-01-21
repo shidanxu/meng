@@ -5,6 +5,7 @@ import os
 from sklearn.preprocessing import normalize
 import random
 import matplotlib.pyplot as plt
+import pickle
 
 if __name__ == '__main__':
 
@@ -33,3 +34,5 @@ if __name__ == '__main__':
 	print count_list
 	print sum(count_list) / len(count_list)
 	print max(count_list), min(count_list)
+
+	pickle.dump(count_list, open("numberOccurrence.p", "wb"))
