@@ -31,11 +31,10 @@ def ipFeature(line):
 def timeStartFeature(line):
     try:
         start, end, ip, device, identity = line.split(";")
+        hour, minute, sec = [int(x) for x in start.strip().split(":")]
     except ValueError:
         return None
-
-    hour, minute, sec = [int(x) for x in start.strip().split(":")]
-
+        
     first5 = '{0:05b}'.format(hour)
     second6 = '{0:06b}'.format(minute)
     third6 = '{0:06b}'.format(sec)
