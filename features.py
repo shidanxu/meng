@@ -9,7 +9,11 @@ ipDict = {}
 allDevices = {}
 devices = []
 def ipFeature(line):
-    start, end, ip, device, identity = line.split(";")
+    try:
+        start, end, ip, device, identity = line.split(";")
+    except ValueError:
+        return None
+        
     ip = ip.strip()
     ip1, ip2, ip3, ip4 = [int(x) for x in ip.split(".")]
     vec = "0"* 32
