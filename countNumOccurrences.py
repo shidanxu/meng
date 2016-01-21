@@ -25,6 +25,11 @@ if __name__ == '__main__':
 				count = len(content)
 				# print count
 				if count > 300:
-					print content
-					raw_input()
+					print count, content
+					print "\n\n\n"
+					# raw_input()
 				count_list.append(count)
+
+	print count_list
+	print sum(count_list) / len(count_list)
+	print max(count_list), min(count_list)
