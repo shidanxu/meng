@@ -21,7 +21,7 @@ if __name__ == '__main__':
 	count_list = []
 	ip_count_list = np.array([0]*32)
 	total_ip = 0
-	daycount = 30
+	daycount = 14
 
 	for afile in files:
 		if daycount == 0:
@@ -55,7 +55,8 @@ if __name__ == '__main__':
 	# print max(count_list), min(count_list)
 
 	print ip_count_list
-	print ip_count_list/total_ip
+	print ip_count_list, total_ip
+	total_ip =float(total_ip)
 
 	frequencyIP = ip_count_list/total_ip
 
