@@ -24,9 +24,9 @@ if __name__ == '__main__':
 				content = f.readlines()
 				count = len(content)
 				# print count
-				if count > 300:
-					print count, content
-					print "\n\n\n"
+				# if count > 300:
+					# print count, content
+					# print "\n\n\n"
 					# raw_input()
 				count_list.append(count)
 
