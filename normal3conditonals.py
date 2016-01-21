@@ -2,6 +2,7 @@ import numpy as np
 import pymc3 as pm
 import scipy as sp
 import pymc3 as pm
+import pickle
 model = pm.Model()
 
 # This model approximates the avg time spent per session as a distribution
