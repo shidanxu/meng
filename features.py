@@ -12,32 +12,53 @@ def ipFeature(line):
     start, end, ip, device, identity = line.split(";")
     ip = ip.strip()
     ip1, ip2, ip3, ip4 = [int(x) for x in ip.split(".")]
-    vec = [0]* (255*4)
-    vec[ip1] = 1
-    vec[ip2 + 255] = 1
-    vec[ip3 + 255] = 1
-    vec[ip4 + 255] = 1
-    return vec
+    vec = "0"* 32
+    first8 = '{0:08b}'.format(ip1)
+    second8 = '{0:08b}'.format(ip2)
+    third8 = '{0:08b}'.format(ip3)
+    fourth8 = '{0:08b}'.format(ip4)
+
+    vec[0:8] = first8
+    vec[8:16] = second8
+    vec[16:24] = third8
+    vec[24:32] = fourth8
+
+    print vec
+    return list(vec)
 
 def timeStartFeature(line):
     start, end, ip, device, identity = line.split(";")
     hour, minute, sec = [int(x) for x in start.strip().split(":")]
 
-    vect = [0] * 144
-    vect[hour] = 1
-    vect[24 + minute] = 1
-    vect[84 + sec] = 1
-    return vect
+    first5 = '{0:05b}'.format(hour)
+    second6 = '{0:06b}'.format(minute)
+    third6 = '{0:06b}'.format(sec)
+
+
+    vect = "0" * 17
+    vect[0:5] = first5
+    vect[5:11] = second6
+    vect[11:17] = third6
+
+    print vect
+    return list(vect)
 
 def timeEndFeature(line):
     start, end, ip, device, identity = line.split(";")
     hour, minute, sec = [int(x) for x in end.strip().split(":")]
 
-    vect = [0] * 144
-    vect[hour] = 1
-    vect[24 + minute] = 1
-    vect[84 + sec] = 1
-    return vect
+    first5 = '{0:05b}'.format(hour)
+    second6 = '{0:06b}'.format(minute)
+    third6 = '{0:06b}'.format(sec)
+
+
+    vect = "0" * 17
+    vect[0:5] = first5
+    vect[5:11] = second6
+    vect[11:17] = third6
+
+    print vect
+    return list(vect)
 
 def device(line):
     start, end, ip, device, identity = line.split(";")
@@ -51,20 +72,25 @@ def device(line):
     else:
         allDevices[device] = len(devices) - 1
         return allDevices[device]
+    # clean data
+
 
 def duration(line):
     start, end, ip, device, identity = line.split(";")
     FMT = '%H:%M:%S'
     tdelta = datetime.strptime(end.strip(), FMT) - datetime.strptime(start.strip(), FMT)
-    return tdelta.seconds/60
+    return tdelta.seconds
 
 def durationLessThanMinute(line):
-    return duration(line) < 1
+    return duration(line)/60 < 1
 
 def durationOneToFive(line):
-    minutes = duration(line)
+    minutes = duration(line)/60
     return minutes > 0 and minutes < 5
 
 def durationFiveOrMore(line):
-    minutes = duration(line)
+    minutes = duration(line)/60
     return minutes >= 5
+
+# midnight cases
+# construct more data for time
