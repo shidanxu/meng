@@ -15,7 +15,7 @@ if __name__ == '__main__':
 	
 	for afile in files:
 		print afile
-		with open(os.path.join(current_path, afile), 'r') as f:
+		with open(os.path.join(currentPath, afile), 'r') as f:
 			content = f.readlines()
 			count = 0
 			for line in content:
