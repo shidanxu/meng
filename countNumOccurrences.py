@@ -5,14 +5,13 @@ import os
 from sklearn.preprocessing import normalize
 import random
 import matplotlib.pyplot as plt
-import features
 
 if __name__ == '__main__':
 
 	currentPath = os.getcwd() + "../../"
 	oldpath = "../../alllogs"
 
-	files = get_all_files(oldpath)
+	files = utilities.get_all_files(oldpath)
 	
 	for afile in files:
 		print afile
