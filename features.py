@@ -86,6 +86,21 @@ def duration(line):
         return None
     return tdelta.seconds
 
+# What the start hour is
+def timeOfDay(line):
+    try:
+        start, end, ip, device, identity = line.split(";")
+        hour, minute, sec = [int(x) for x in start.strip().split(":")]
+    except ValueError:
+        return None
+        
+    # first5 = '{0:05b}'.format(hour)
+    # second6 = '{0:06b}'.format(minute)
+    # third6 = '{0:06b}'.format(sec)
+
+    return hour
+
+
 def durationLessThanMinute(line):
     return duration(line)/60 < 1
 
