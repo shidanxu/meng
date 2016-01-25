@@ -31,7 +31,7 @@ if __name__ == '__main__':
 		print afile
 		for individual_files in os.listdir(os.path.join(current_path, afile)):
 			# print individual_files
-			dates = re.findall('\d{8}', current_path)
+			dates = re.findall('\d{8}', afile)
 			if len(dates) != 1:
 				print dates, "\n\n"
 			else:
