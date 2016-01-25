@@ -37,8 +37,8 @@ if __name__ == '__main__':
 			else:
 				print dates
 
-		date_object = datetime.strptime(dates[0], '%H%M%S')
-		dayOfWeek = date_object.weekday()
+			date_object = datetime.strptime(dates[0], '%H%M%S')
+			dayOfWeek = date_object.weekday()
 
 			with open(os.path.join(os.path.join(current_path, afile), individual_files), 'r') as f:
 				content = f.readlines()
