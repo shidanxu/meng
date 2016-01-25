@@ -22,24 +22,25 @@ if __name__ == '__main__':
 	current_path = os.path.join(currentPath, oldpath)
 	DOW_list = []
 	total_time = 0
-	daycount = 14
+	# daycount = 50
 
 	for afile in files:
-		if daycount == 0:
-			break
-		daycount -= 1
+		# if daycount == 0:
+		# 	break
+		# daycount -= 1
 		print afile
+		dates = re.findall('\d{8}', afile)
+		if len(dates) != 1:
+			print dates, "\n\n"
+		else:
+			print dates
+		date_object = datetime.strptime(dates[0], '%Y%m%d')
+		dayOfWeek = date_object.weekday()
+		print dayOfWeek
+
 		for individual_files in os.listdir(os.path.join(current_path, afile)):
 			# print individual_files
-			dates = re.findall('\d{8}', afile)
-			if len(dates) != 1:
-				print dates, "\n\n"
-			else:
-				print dates
-
-			date_object = datetime.strptime(dates[0], '%Y%m%d')
-			dayOfWeek = date_object.weekday()
-
+					
 			with open(os.path.join(os.path.join(current_path, afile), individual_files), 'r') as f:
 				content = f.readlines()
 				count = len(content)
