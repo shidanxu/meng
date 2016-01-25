@@ -58,7 +58,7 @@ if __name__ == '__main__':
 					if line.strip() != None:				
 						val = features.timeOfDay(line)
 					if val != None:
-						if dayOfWeek == 5 or if dayOfWeek == 6:
+						if dayOfWeek == 5 or dayOfWeek == 6:
 							DOW_list[dayOfWeek] += 1
 							TOD_weekend_list.append(val)
 						else:
