@@ -20,7 +20,7 @@ if __name__ == '__main__':
 	files = utilities.get_all_files(oldpath)
 
 	current_path = os.path.join(currentPath, oldpath)
-	DOW_list = []
+	DOW_list = [0,0,0,0,0,0,0]
 	total_time = 0
 	# daycount = 50
 
@@ -54,8 +54,7 @@ if __name__ == '__main__':
 
 				for line in content:
 					if line.strip() != None:
-						DOW_list.append(dayOfWeek)
-						
+						DOW_list[dayOfWeek] += 1
 						
 
 	# print count_list
