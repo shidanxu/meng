@@ -30,11 +30,18 @@ observed_numberOccurrences = pickle.load( open( "numberOccurrence.p", "rb" ) )
 # observed_ipFrequencies = pickle.load( open( "ipBinaryFrequency.p", "rb" ) )
 
 weekend_timeStart_observed = pickle.load(open("weekendStartShort.p", "rb"))
-# pickle.dump(weekend_timeStart_observed[:1000000], open("weekendStartShort.p", "wb"))
+# pickle.dump(weekend_timeStart_observed[:100000], open("miniweekendStart.p", "wb"))
 weekday_timeStart_observed = pickle.load(open("weekdayStartShort.p", "rb"))
-# pickle.dump(weekday_timeStart_observed[:1000000], open("weekdayStartShort.p", "wb"))
+# pickle.dump(weekday_timeStart_observed[:100000], open("miniweekdayStart.p", "wb"))
 a_observed = np.array(weekend_timeStart_observed)
+a_observed_corrected = (a_observed + 19 ) %24
 b_observed = np.array(weekday_timeStart_observed)
+b_observed_corrected = (b_observed + 19 ) %24
+# Adjust for the 5 hour difference in normal distribution
+
+# frequencies = np.array(observed_numberOccurrences[:100000])
+# data = dict(a_observed=a_observed, b_observed=b_observed)
+# print "HAHHAHAAHAH"
 
 # n_bins = 24
 # n, bins, patches = plt.hist(b, n_bins, normed = 1,
@@ -111,58 +118,41 @@ b_observed = np.array(weekday_timeStart_observed)
 
 with model: # model specifications in PyMC3 are wrapped in a with-statement
 
-
+    # pm.glm.glm('b_observed ~ a_observed', data)
 
     # define priors
     muA = pm.Uniform('muA', lower=0, upper=24)
-    muB = pm.Uniform('muB', lower=0, upper=24)
-    muC = pm.Uniform('muC', lower=0, upper=24)
 
-    sigmaA = pm.Uniform('sigmaA', lower=0, upper=1000)
-    sigmaB = pm.Uniform('sigmaB', lower=0, upper=1000)
-    sigmaC = pm.Uniform('sigmaC', lower=0, upper=1000)
+    # muC = pm.Uniform('muC', lower=0, upper=24)
+
+    sigmaA = pm.Uniform('sigmaA', lower=0, upper=100)
+    sigmaB = pm.Uniform('sigmaB', lower=0, upper=100)
+    # sigmaC = pm.Uniform('sigmaC', lower=0, upper=1000)
 
 
     distributionA = pm.Normal('a', mu = muA, sd = sigmaA, observed = a_observed)
-    # distributionB = pm.Normal('b', mu = muB, sd = sigmaB, observed = b_observed)
-    # distributionC = pm.Normal('c', mu = muC, sd = sigmaC, observed = c_observed)
 
-    x1 = pm.Uniform('x1', lower = -10000, upper = 10000)
-    x2 = pm.Uniform('x2', lower = -10000, upper = 10000)
-    t1 = pm.Uniform('t1', lower = -10000, upper = 10000)
-    t2 = pm.Uniform('t2', lower = -10000, upper = 10000)
-    
+    x1 = pm.Uniform('x1', lower = -1000, upper = 1000)
+    x2 = pm.Uniform('x2', lower = -1000, upper = 1000)
 
-    def distributionB(value = b_observed, mu = muA, x1 = x1, sigma = sigmaA, x2= x2, t1 = t1, t2= t2):
-        return pm.Normal('b', mu = mu * x1 + x2, sd = sigma * t1 + t2, observed = value)
-
-    # b_model = pm.Deterministic('b_model', model=distributionB)
-
-    ipdb.set_trace()
-    distributionB = distributionB()
+    distributionB = pm.Normal('b', mu = distributionA * x1 + x2, sd = sigmaB, observed = b_observed)
 
     
-    # @pm.observed
-    # def Z(value=b_observed, mu=muA, tau=tau_A, y=bb):
-    #     # Likelihood for x (also latent, but fixed given y and z)
-    #     return pm.normal_like(value-y, mu, tau)
+    # ipdb.set_trace()
 
-     
-    # muB = pm.Lambda('p_B', lambda R=R: pl.where(distributionA, .5, .8),
-    #             doc='Pr[B|A]')
-    # B = pm.Bernoulli('S', p_S, value=pl.ones(N))
- 
-    # p_C = pm.Lambda('p_C', lambda A=A, B=B:
-    #             pl.where(S, pl.where(R, .99, .9), pl.where(R, .8, 0.)),
-    #             doc='Pr[C|A,B]')
 
+   
+    print "MODEL BUILT! READY TO FIND MAP"
     start = pm.find_MAP()
     step = pm.Slice()
+    # step = pm.NUTS(scaling=start)
 
-    niter = 100
+    niter = 500
     trace = pm.sample(niter, step, start, progressbar=True)
 
-    pm.traceplot(trace, vars=['muA'])
+    pm.traceplot(trace)
+        # , vars=['muA'])
+    plt.savefig("data1.png")
     plt.show()
 
     # # print ppc['Y_obs']
