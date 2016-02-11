@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import re
 import pickle
+from datetime import datetime
 
 def combine(entry):
 	pass
@@ -54,7 +55,9 @@ def main(testSampleSize = 10):
 
 					actualFilePath = os.path.join(path, logFile)
 					dataFile = pd.read_csv(actualFilePath, sep = ";", names = ["id", "timeStart", "timeEnd", "ip", "device"], header=None)
-					dataFile["date"] = date
+					dateTimeDate = datetime(date)
+					dataFile["date"] = dateTimeDate
+					dataFile["weekday"] = dataFile["date"].weekday()
 					print dataFile.head()
 
 					limit -= 1
