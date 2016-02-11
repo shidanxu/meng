@@ -13,8 +13,8 @@ def computeDate(filename):
 	p = re.compile(r'(\d{8})')
 	results = re.search(p, filename)
 	print "filename is: ", filename, type(filename)
-	print "results is: ", results[0]
-	return results[0]
+	print "results is: ", results.group(0)
+	return results.group(0)
 
 def dump(filename, obj):
 	pickle.dump(obj, filename)
