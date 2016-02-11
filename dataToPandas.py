@@ -37,6 +37,7 @@ def main(testSampleSize = 1000):
 	finished = False
 	parse = True
 	basepath = '../../alllogs/'
+	dataFile = []
 
 	try:
 		os.listdir(basepath)
@@ -67,14 +68,15 @@ def main(testSampleSize = 1000):
 					dataFile["date"] = date
 					weekday = computeWeekday(date)
 					dataFile["weekday"] = weekday
-					print dataFile.head()
+				
 
 					limit -= 1
+				print dataFile.head()
 					# print limit
 					# print totalTransitionMatrix
 
 if __name__ == '__main__':
-	main(1000)
+	main(10000)
 
 # What are the entries I want
 # Date, Day of week, 
