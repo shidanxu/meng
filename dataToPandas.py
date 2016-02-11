@@ -10,7 +10,8 @@ def combine(entry):
 	pass
 
 def computeDate(filename):
-	results = re.match(filename, r"^[0-9]{8}$")
+	p = re.compile('\d{8}')
+	results = re.match(p, filename)
 	print "filename is: ", filename
 	print "results is: ", results
 	return results
