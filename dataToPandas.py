@@ -74,7 +74,7 @@ def main(testSampleSize = 1000):
 					# print totalTransitionMatrix
 
 if __name__ == '__main__':
-	main(10)
+	main(1000)
 
 # What are the entries I want
 # Date, Day of week, 
