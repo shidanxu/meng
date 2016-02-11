@@ -20,7 +20,8 @@ def computeDate(filename):
 
 def computeWeekday(stringDate):
 	dateTimeDate = time.strptime(stringDate, "%Y%m%d")
-	return dateTimeDate.weekday()
+	dt = datetime.fromtimestamp(mktime(dateTimeDate))
+	return dt.weekday()
 
 def dump(filename, obj):
 	pickle.dump(obj, filename)
