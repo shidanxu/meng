@@ -11,7 +11,7 @@ def combine(entry):
 
 def computeDate(filename):
 	p = re.compile(r'(\d{8})')
-	results = re.match(p, filename)
+	results = re.search(p, filename)
 	print "filename is: ", filename, type(filename)
 	print "results is: ", results
 	return results
