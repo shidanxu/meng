@@ -30,7 +30,7 @@ def pdCombine(file, df):
 	df = df.concat(file)
 	return df
 
-def main(testSampleSize = 10):
+def main(testSampleSize = 1000):
 	totalTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
 
 	limit = testSampleSize
