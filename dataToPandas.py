@@ -11,6 +11,8 @@ def combine(entry):
 
 def computeDate(filename):
 	results = re.findall(r"^[0-9]{8}$", filename)
+	print "filename is: ", filename
+	print "results is: ", results
 	return results[0]
 
 def dump(filename, obj):
