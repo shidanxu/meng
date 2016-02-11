@@ -58,6 +58,7 @@ def main(testSampleSize = 10):
 					dataFile = pd.read_csv(actualFilePath, sep = ";", names = ["id", "timeStart", "timeEnd", "ip", "device"], header=None)
 					
 					dateTimeDate = time.strptime(date, "%Y%m%d")
+					print dateTimeDate
 					dataFile["date"] = dateTimeDate
 					dataFile["weekday"] = dataFile["date"].weekday()
 					print dataFile.head()
