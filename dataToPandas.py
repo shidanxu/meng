@@ -20,7 +20,7 @@ def computeDate(filename):
 
 def computeWeekday(stringDate):
 	dateTimeDate = time.strptime(stringDate, "%Y%m%d")
-	dt = datetime.fromtimestamp(mktime(dateTimeDate))
+	dt = datetime.fromtimestamp(time.mktime(dateTimeDate))
 	return dt.weekday()
 
 def dump(filename, obj):
