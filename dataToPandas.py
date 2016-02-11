@@ -53,7 +53,8 @@ def main(testSampleSize = 10):
 						break
 
 					actualFilePath = os.path.join(path, logFile)
-					dataFile = pd.read_csv(actualFilePath, sep = ";")
+					dataFile = pd.read_csv(actualFilePath, sep = ";", headers = ["id", "timeStart", "timeEnd", "ip", "device")
+					dateFile["date"] = date
 					print dataFile.head()
 
 					limit -= 1
