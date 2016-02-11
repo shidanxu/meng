@@ -13,8 +13,8 @@ def computeDate(filename):
 	p = re.compile(r'(\d{8})')
 	results = re.search(p, filename)
 	print "filename is: ", filename, type(filename)
-	print "results is: ", results
-	return results
+	print "results is: ", results[0]
+	return results[0]
 
 def dump(filename, obj):
 	pickle.dump(obj, filename)
@@ -52,7 +52,7 @@ def main(testSampleSize = 10):
 						finished = True
 						break
 
-					actualFilePath = os.join(path, logFile)
+					actualFilePath = os.path.join(path, logFile)
 					dataFile = pd.read_csv(actualFilePath, sep = ";")
 					print dataFile.head()
 
