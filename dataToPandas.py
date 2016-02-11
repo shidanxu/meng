@@ -6,6 +6,7 @@ import pandas as pd
 import re
 import pickle
 from datetime import datetime
+import time
 
 def combine(entry):
 	pass
@@ -55,7 +56,7 @@ def main(testSampleSize = 10):
 
 					actualFilePath = os.path.join(path, logFile)
 					dataFile = pd.read_csv(actualFilePath, sep = ";", names = ["id", "timeStart", "timeEnd", "ip", "device"], header=None)
-					dateTimeDate = datetime(date)
+					dateTimeDate = time.strptime(date, "%y%m%d")
 					dataFile["date"] = dateTimeDate
 					dataFile["weekday"] = dataFile["date"].weekday()
 					print dataFile.head()
