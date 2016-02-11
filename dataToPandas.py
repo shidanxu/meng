@@ -18,6 +18,10 @@ def computeDate(filename):
 	print "results is: ", results.group(0)
 	return results.group(0)
 
+def computeWeekday(stringDate):
+	dateTimeDate = time.strptime(stringDate, "%Y%m%d")
+	return dateTimeDate.weekday()
+
 def dump(filename, obj):
 	pickle.dump(obj, filename)
 
@@ -58,9 +62,10 @@ def main(testSampleSize = 10):
 					dataFile = pd.read_csv(actualFilePath, sep = ";", names = ["id", "timeStart", "timeEnd", "ip", "device"], header=None)
 					
 					dateTimeDate = time.strptime(date, "%Y%m%d")
-					print dateTimeDate
-					dataFile["date"] = dateTimeDate
-					dataFile["weekday"] = dataFile["date"].weekday()
+					# print dateTimeDate
+					dataFile["date"] = date
+					weekday = computeWeekday(date)
+					dataFile["weekday"] = weekday
 					print dataFile.head()
 
 					limit -= 1
