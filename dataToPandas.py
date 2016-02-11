@@ -10,10 +10,10 @@ def combine(entry):
 	pass
 
 def computeDate(filename):
-	results = re.findall(r"^[0-9]{8}$", filename)
+	results = re.match(filename, r"^[0-9]{8}$")
 	print "filename is: ", filename
 	print "results is: ", results
-	return results[0]
+	return results
 
 def dump(filename, obj):
 	pickle.dump(obj, filename)
