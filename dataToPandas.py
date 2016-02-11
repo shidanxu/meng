@@ -56,7 +56,8 @@ def main(testSampleSize = 10):
 
 					actualFilePath = os.path.join(path, logFile)
 					dataFile = pd.read_csv(actualFilePath, sep = ";", names = ["id", "timeStart", "timeEnd", "ip", "device"], header=None)
-					dateTimeDate = time.strptime(date, "%y%m%d")
+					
+					dateTimeDate = time.strptime(date, "%Y%m%d")
 					dataFile["date"] = dateTimeDate
 					dataFile["weekday"] = dataFile["date"].weekday()
 					print dataFile.head()
