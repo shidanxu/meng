@@ -38,7 +38,7 @@ def main(testSampleSize = 1000):
 	parse = True
 	basepath = '../../alllogs/'
 	dataFile = []
-	dailyTotalData = []
+	dailyTotalData = pd.DataFrame()
 
 	try:
 		os.listdir(basepath)
