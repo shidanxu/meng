@@ -70,7 +70,7 @@ def main(testSampleSize = 1000):
 					weekday = computeWeekday(date)
 					dataFile["weekday"] = weekday
 
-					dailyTotalData = dailyTotalData.append(dataFile)
+					dailyTotalData = pd.concat([dailyTotalData, dataFile])
 
 					limit -= 1
 				print dailyTotalData.head()
