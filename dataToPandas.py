@@ -62,7 +62,7 @@ def main(testSampleSize = 1000):
 						break
 
 					actualFilePath = os.path.join(path, logFile)
-					dataFile = pd.read_csv(actualFilePath, sep = ";", names = ["id", "timeStart", "timeEnd", "ip", "device"], header=None)
+					dataFile = pd.read_csv(actualFilePath, sep = ";", names = ["timeStart", "timeEnd", "ip", "device", "id"], header=None)
 					
 					dateTimeDate = time.strptime(date, "%Y%m%d")
 					# print dateTimeDate
@@ -74,6 +74,7 @@ def main(testSampleSize = 1000):
 
 					limit -= 1
 				print dailyTotalData.head()
+				dailyTotalData.to_pickle("pickleData/data" + str(date) + ".pickle")
 					# print limit
 					# print totalTransitionMatrix
 
