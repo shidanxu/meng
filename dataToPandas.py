@@ -38,6 +38,7 @@ def main(testSampleSize = 1000):
 	parse = True
 	basepath = '../../alllogs/'
 	dataFile = []
+	dailyTotalData = []
 
 	try:
 		os.listdir(basepath)
@@ -68,10 +69,11 @@ def main(testSampleSize = 1000):
 					dataFile["date"] = date
 					weekday = computeWeekday(date)
 					dataFile["weekday"] = weekday
-				
+
+					dailyTotalData = dailyTotalData.append(dataFile)
 
 					limit -= 1
-				print dataFile.head()
+				print dailyTotalData.head()
 					# print limit
 					# print totalTransitionMatrix
 
