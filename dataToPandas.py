@@ -30,7 +30,7 @@ def pdCombine(file, df):
 	df = df.concat(file)
 	return df
 
-def main(testSampleSize = 1000):
+def main(testSampleSize = 10000000000):
 	totalTransitionMatrix = np.matrix([[0,0,0], [0,0,0], [0,0,0]])
 
 	limit = testSampleSize
@@ -79,7 +79,7 @@ def main(testSampleSize = 1000):
 					# print totalTransitionMatrix
 
 if __name__ == '__main__':
-	main(10000)
+	main()
 
 # What are the entries I want
 # Date, Day of week, 
