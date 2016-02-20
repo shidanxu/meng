@@ -54,6 +54,7 @@ def main(testSampleSize = 10000000000):
 			path = os.path.join(basepath, files)
 			if os.path.isdir(path):
 				date = computeDate(path)
+				dailyTotalData = pd.DataFrame()
 				print "Date is: ", date
 
 				for logFile in os.listdir(path):
