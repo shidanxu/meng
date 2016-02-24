@@ -56,6 +56,8 @@ def main(testSampleSize = 10000000000):
 				date = computeDate(path)
 				dailyTotalData = pd.DataFrame()
 				print "Date is: ", date
+				if date.startswith("201312"):
+					continue
 
 				for logFile in os.listdir(path):
 					if limit == 0:
